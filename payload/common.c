@@ -19,33 +19,26 @@ void late_init() {
     handle_late_bootmode();
     register_commands();
 
-/*    volatile uint16_t *x = (volatile uint16_t *)0x4c44f0c0; // orange_state_warning
+    volatile uint16_t *x = (volatile uint16_t *)0x48041da0; // orange_state_warning
     x[0] = 0x2000; // movs r0, #0
     x[1] = 0x4770; // bx lr
-    arch_clean_invalidate_cache_range((uint32_t)0x4c44f0c0, 2);
+    arch_clean_invalidate_cache_range((uint32_t)0x48041da0, 2);
 
-    x = (volatile uint16_t *)0x4c44eff0; // red_state_warning
+    x = (volatile uint16_t *)0x48041cd0; // red_state_warning
     x[0] = 0x4770; // bx lr
-    arch_clean_invalidate_cache_range((uint32_t)0x4c44eff0, 2);*/
+    arch_clean_invalidate_cache_range((uint32_t)0x48041cd0, 2);
+
+    x = (volatile uint16_t *)0x48061ea0; // dm_verity_corruption_warning
+    x[0] = 0x4770; // bx lr
+    arch_clean_invalidate_cache_range((uint32_t)0x48061ea0, 2);
+
+    x = (volatile uint16_t *)0x480623e2; // libavb_verify_something
+    x[0] = 0x2300; // mov.eq r3, #0x0 (BOOT_STATE_GREEN)
+    arch_clean_invalidate_cache_range((uint32_t)0x480623e2, 2);
 }
 
 void early_init() {
     __asm__("mcr p15, 0, %0, c7, c5, 0" : : "r" (0));
-/*    ((volatile uint32_t *)0x4c5207c8)[0] = BOOT_STATE_GREEN;
-    arch_clean_invalidate_cache_range(0x4c5207c8, 4);
-
-    volatile uint16_t *x = (volatile uint16_t *)0x4c42c8e0; // register cmd_flash
-    x[0] = 0x46c0; // nop
-    x[1] = 0x46c0; // nop
-    arch_clean_invalidate_cache_range((uint32_t)0x4c42c8e0, 2);
-
-    x = (volatile uint16_t *)0x4c42cb72; // register cmd_flashing_lock
-    x[0] = 0x46c0; // nop
-    x[1] = 0x46c0; // nop
-    arch_clean_invalidate_cache_range((uint32_t)0x4c42cb72, 2);
-
-    x = (volatile uint16_t *)0x4c42c8f4; // register cmd_erase
-    x[0] = 0x46c0; // nop
-    x[1] = 0x46c0; // nop
-    arch_clean_invalidate_cache_range((uint32_t)0x4c42c8f4, 2);*/
+    ((volatile uint32_t *)0x480ea8b8)[0] = BOOT_STATE_GREEN;
+    arch_clean_invalidate_cache_range(0x480ea8b8, 4);
 }
