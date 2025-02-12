@@ -3,17 +3,17 @@
 import sys
 import struct
 
-base = 0x4c400000
+base = 0x48000000
 hdr_sz = 0x200
 
-pivot = 0x4c427638 # platform_init() caller
-heap_start = 0x4c5b8710 # merely informative
+pivot = 0x4801ec64 # platform_init() caller
+heap_start = 0x481835dc # merely informative
 
 # TODO: Relocate the payload to a better location
 #       (e.g. after the LK code, before the heap)
 #       since a big enough payload will overwrite
 #       the heap and cause instability.
-inject_addr = 0x4c4f6400 - base + hdr_sz
+inject_addr = 0x480c4350 - base + hdr_sz
 
 def encode_bl(src, dst):
     off = dst - (src + 4)

@@ -8,11 +8,11 @@ typedef long word;
 #define lmask (lsize - 1)
 
 void *malloc(size_t size) {
-    return ((void *(*)(size_t))(0x4c43b7d0 | 1))(size);
+    return ((void *(*)(size_t))(0x48030c00 | 1))(size);
 }
 
 void free(void *ptr) {
-    ((void (*)(void *))(0x4c43ab60 | 1))(ptr);
+    ((void (*)(void *))(0x48030378 | 1))(ptr);
 }
 
 void *memcpy(void *dest, const void *src, size_t count)
