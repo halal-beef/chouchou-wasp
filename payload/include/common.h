@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdbool.h>
+
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 
 /* verified boot state */
@@ -9,6 +11,7 @@
 #define BOOT_STATE_RED     0x3
 
 int app();
+bool mtk_detect_key(unsigned short key);
 void platform_init();
 void early_init();
 void late_init();

@@ -1,4 +1,5 @@
 #include "include/arm.h"
+#include "include/bootmode.h"
 #include "include/commands.h"
 #include "include/common.h"
 
@@ -10,7 +11,12 @@ void platform_init() {
     ((void (*)(void))(0x48002be0 | 1))();
 }
 
+bool mtk_detect_key(unsigned short key) {
+    return ((bool (*)(unsigned short))(0x48004e28 | 1))(key);
+}
+
 void late_init() {
+    handle_late_bootmode();
     register_commands();
 
 /*    volatile uint16_t *x = (volatile uint16_t *)0x4c44f0c0; // orange_state_warning
