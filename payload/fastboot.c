@@ -1,7 +1,7 @@
 #include "include/fastboot.h"
 
 void fastboot_info(const char *reason) {
-    ((void (*)(const char *reason))(0x48030bb4 | 1))(reason);
+    ((void (*)(const char *reason))(0x480236a4 | 1))(reason);
 }
 
 void fastboot_fail(const char *reason) {
